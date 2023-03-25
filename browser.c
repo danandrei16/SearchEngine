@@ -274,25 +274,18 @@ void Google(site * siteuri, int nr) {
     endwin();
 }
 int main() {
-    FILE * fisier_master, * fisier_site;
-    fisier_master = fopen("master.txt", "r");
+    FILE * fisier_site;
     char linie[31], continut_fisier[201], * p;
-    int i, nr_siteuri = 3, aux, nr = 0;
+    int i, nr_siteuri = 7, aux, nr = 0;
+    char siteNames[7][31] = {"sites/a_s_e.html", "sites/alabalaportocala.html", "sites/alt_site.html", "sites/facebook.html", "sites/important.html", "sites/tutorial_franceza.html", "sites/upb.html"};
     color * culori_siteuri_text = malloc(nr_siteuri * sizeof(color)); // alocare dinamica - enum
     color * culori_siteuri_bg = malloc(nr_siteuri * sizeof(color));
     site * siteuri = malloc(nr_siteuri * sizeof(site)); // alocare dinamica - struct
-    for (i = 0; fgets(linie, 31, fisier_master); i++) {
+    for (i = 0; i < nr_siteuri; i++) {
         // citesc din master.txt
         char culori[50] = ""; // voi retine mai tarziu "color:...;background-color:..."
         int ghilimele = 0; //ptr proprietati color, bg color
-        if (i + 1 > nr_siteuri) {
-            nr_siteuri += 3;
-            siteuri = realloc(siteuri, nr_siteuri * sizeof(site)); // realoc dimensiune pentru nr. de siteuri citite(nr de struct)
-            culori_siteuri_text = realloc(culori_siteuri_text, nr_siteuri * sizeof(color));
-            culori_siteuri_bg = realloc(culori_siteuri_bg, nr_siteuri * sizeof(color));
-        }
-        if (linie[strlen(linie) - 1] == '\n')
-            linie[strlen(linie) - 1] = '\0'; //elimina \n
+        strcpy(linie, siteNames[i]);
         fisier_site = fopen(linie, "r"); // deschide fisier siteX.html
         fgets(continut_fisier, 201, fisier_site); // citesc prima linie din fisierul siteX.html
         int dim = 101;
@@ -435,8 +428,7 @@ int main() {
         free(copie_continut); // eliberez memorie ptr copia fisierului
         fclose(fisier_site);
     }
-    fclose(fisier_master);
-    //AICI REZOLV TASK 5
+    //AICI REZOLV TASK 5 
     Google(siteuri, nr);
     //AICI ELIBEREZ MEMORIE ptr struct
     for (i = 0; i < nr; i++) {
