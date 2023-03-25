@@ -1,7 +1,7 @@
 # SearchEngine
 
-Command to run on linux (after installing ncurses)
-gcc -o browser browser.c -lncurses
+Command to run on linux (after installing ncurses)<br>
+gcc -o browser browser.c -lncurses <br>
 ./browser
 
 ![browser](https://user-images.githubusercontent.com/94062909/227738040-548ab777-d769-4d65-9a70-c2a736dc9a26.gif)
